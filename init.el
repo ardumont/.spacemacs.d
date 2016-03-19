@@ -55,7 +55,7 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(notmuch offlineimap weechat jabber)
+   dotspacemacs-additional-packages '(notmuch offlineimap weechat jabber smartscan paredit)
    ;; A list of packages and/or extensions that will not be install and loaded.
    dotspacemacs-excluded-packages '()
    ;; If non-nil spacemacs will delete any orphan packages, i.e. packages that
@@ -292,7 +292,23 @@ layers configuration. You are free to put any user code."
           (buffer-pack/--goto-line (read-number "Goto line: ")))
       (linum-mode -1)))
 
-  (global-set-key [remap goto-line] 'goto-line-with-feedback))
+  (global-set-key [remap goto-line] 'goto-line-with-feedback)
+
+  (dolist (hook '(emacs-lisp-mode-hook
+                  lisp-mode-hook
+                  inferior-lisp-mode-hook))
+    (add-hook hook
+              (lambda ()
+                (enable-paredit-mode)
+                (hs-minor-mode)
+                (smartscan-mode 1))))
+
+  (use-package paredit
+    :config
+    (define-key paredit-mode-map (kbd "C-M-h") 'backward-kill-sexp)
+    (define-key paredit-mode-map (kbd "M-s") 'paredit-splice-sexp)
+    (define-key paredit-mode-map (kbd "M-S") 'paredit-split-sexp)
+    (define-key paredit-mode-map (kbd "C-h") 'paredit-backward-delete)))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
