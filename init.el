@@ -278,7 +278,21 @@ layers configuration. You are free to put any user code."
                                                                 (call-interactively 'self-insert-command))))))
 
   (setq powerline-default-separator 'arrow)
-  )
+
+  (defun goto-line-with-feedback ()
+    "Show line numbers temporarily, while prompting for the line number input."
+    (interactive)
+    (defun buffer-pack/--goto-line (n)
+      "Internal 'goto-line' to go the line number N."
+      (goto-char (point-min))
+      (forward-line (1- n)))
+    (unwind-protect
+        (progn
+          (linum-mode 1)
+          (buffer-pack/--goto-line (read-number "Goto line: ")))
+      (linum-mode -1)))
+
+  (global-set-key [remap goto-line] 'goto-line-with-feedback))
 
 ;; Do not write anything past this comment. This is where Emacs will
 ;; auto-generate custom variable definitions.
