@@ -264,6 +264,9 @@ layers configuration. You are free to put any user code."
   (global-set-key (kbd "M-?") 'help-command)
   (global-set-key (kbd "C-v") (lambda () (interactive) (forward-line 10)))
   (global-set-key (kbd "M-v") (lambda () (interactive) (forward-line -10)))
+  (global-set-key (kbd "C-x \\") 'align-regexp)
+  (global-set-key (kbd "C-x j") 'avy-goto-word-1)
+  (global-set-key (kbd "C-x g") 'magit-status)
 
   (add-hook 'ido-setup-hook
             (lambda () ;; ~ to go straight home, // to go in /
