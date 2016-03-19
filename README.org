@@ -1,0 +1,4 @@
+#+title: spacemacs.d
+#+author: ardumont
+
+Some configuration using spacemacs.
