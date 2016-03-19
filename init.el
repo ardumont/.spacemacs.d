@@ -262,6 +262,8 @@ layers configuration. You are free to put any user code."
   (global-set-key (kbd "C-h") 'backward-delete-char)
   (global-set-key (kbd "C-x b") 'helm-buffers-list)
   (global-set-key (kbd "M-?") 'help-command)
+  (global-set-key (kbd "C-v") (lambda () (interactive) (forward-line 10)))
+  (global-set-key (kbd "M-v") (lambda () (interactive) (forward-line -10)))
 
   (add-hook 'ido-setup-hook
             (lambda () ;; ~ to go straight home, // to go in /
