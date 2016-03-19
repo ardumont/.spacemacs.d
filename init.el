@@ -26,7 +26,10 @@ values."
      auto-completion
      ;; better-defaults
      emacs-lisp
-     git
+     (git :variables
+          git-gutter-use-fringe t
+          git-magit-status-fullscreen t
+          git-enable-github-support t)
      markdown
      org
      python
